@@ -42,6 +42,7 @@ object Test4{
     bit3df.show()
     val bit1Df=bit3df.withColumn("Year", year(to_timestamp(col("Date"), "yyyy-MM-DD")))
     val windowSpecBit = Window.partitionBy("Year").orderBy("Date").rowsBetween(-19, 0)
+
     val bitresult = bit1Df
       .withColumn("bitcoin_20day_avg", avg("Price").over(windowSpecBit))
     val bitresult1 = bitresult.select( "Date", "High", "Low", "Price", "bitcoin_20day_avg")
